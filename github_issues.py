@@ -18,18 +18,6 @@ if r.status_code == 200:#and splitted_url[0] == "https" and splitted_url[1] == "
 	print "Total number of open issues: " + str(total_issues_json["open_issues"])
 	
 
-	total_page = total_issues_json["open_issues"] / 100 + 1
-	page_number_list = range(1, total_page+1)
-	for no in page_number_list:	
-		url_parameters = {'page': no, 'per_page': 100}
-		per_page_issue = "https://api.github.com/repos/" + str(splitted_url[3]) + "/" + str(splitted_url[4]) + "/issues?"
-		per_page_issue_json = requests.get(per_page_issue, params=url_parameters)
-		created = per_page_issue_json.json()
-		#for ek in created:
-		#	utc_datetime = datetime.datetime.utcnow()
-			#print utc_datetime.strftime("%Y-%m-%dT%H:%M:%SZ") #- ek["updated_at"]
-			
-
 
 	
 	last_24hr = datetime.now() - timedelta(hours=24)
