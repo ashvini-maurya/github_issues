@@ -39,7 +39,8 @@ def getUrl(request):
     #print "Total Number of open issues that were opened more than 7 days ago: " + str((total_issues_json["open_issues"] - count - count2))
 
     total_issues_greater_than_7days = total_issues_json["open_issues"] - count - count2
-    return render(request, 'issues/getData.html', {'total': total_issues, 'count': count, 'count2': count2, 'total_greater_than_7days': total_issues_greater_than_7days})
+    params = {'total': total_issues, 'count': count, 'count2': count2, 'total_greater_than_7days': total_issues_greater_than_7days}
+    return render(request, 'issues/getData.html', params)
 
 
 
