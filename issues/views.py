@@ -8,7 +8,7 @@ def index(request):
     return render(request, 'issues/index.html', {})
 
 def getUrl(request):
-    geturl= request.GET['URL']
+    geturl = request.GET['URL']
     splitted_url = (geturl).split('/')
     total_issues_api = "https://api.github.com/repos/" + str(splitted_url[3]) + "/" + str(splitted_url[4])
     total_issues_response = requests.get(total_issues_api)
