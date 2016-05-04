@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+# from config import *
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -44,7 +46,31 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'issues',
+    'social.apps.django_app.default',
 ]
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+)
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.contrib.github.GithubBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home/'
+# SOCIAL_AUTH_LOGIN_URL = '/'
+
 
 MIDDLEWARE_CLASSES = [
     #'django.middleware.security.SecurityMiddleware',
@@ -121,6 +147,11 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+
+GITHUB_APP_ID = '62c56f5b0c683dfbc36b'
+GITHUB_API_SECRET = '4ca5313dd8f71d33eabfadbcd638fd631ded6d10'
 
 
 # Static files (CSS, JavaScript, Images)
