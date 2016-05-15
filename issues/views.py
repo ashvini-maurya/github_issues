@@ -1,11 +1,11 @@
-from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, HttpResponse, render_to_response
 import requests
 import json
 from datetime import datetime, timedelta
 
 
 def index(request):
-    return render(request, 'issues/index.html', {})
+    return render(request, 'base.html', {})
 
 def getUrl(request):
     geturl = request.GET['URL']
@@ -38,6 +38,7 @@ def getUrl(request):
         total_issues_greater_than_7days = total_issues_json["open_issues"] - count - count2
         params = {'total': total_issues, 'count': count, 'count2': count2, 'total_greater_than_7days': total_issues_greater_than_7days}
         return render(request, 'issues/getData.html', params)
+
 
     else:
         return HttpResponse("Invalid URL. url should be in format 'https://github.com/{org_name or user_name}/{repo_name}/{issues}'")
