@@ -36,6 +36,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+
+GITHUB_APP_ID = '62c56f5b0c683dfbc36b'
+GITHUB_API_SECRET = '4ca5313dd8f71d33eabfadbcd638fd631ded6d10'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -149,9 +155,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-
-GITHUB_APP_ID = '62c56f5b0c683dfbc36b'
-GITHUB_API_SECRET = '4ca5313dd8f71d33eabfadbcd638fd631ded6d10'
 
 
 # Static files (CSS, JavaScript, Images)
