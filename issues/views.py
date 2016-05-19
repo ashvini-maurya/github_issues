@@ -38,6 +38,12 @@ def getUrl(request):
         for api_urls in last_24hr_url_api_data.json():
             li_last_24hr_url_api.append(api_urls["url"])
 
+
+        title_li = []
+        for title in last_24hr_url_api_data.json():
+            title_li.append(title['title'])
+        print(title_li)
+
         count = 0
         for updated_value in get_url_api_data.json():
             count += 1
@@ -53,7 +59,7 @@ def getUrl(request):
             count2 += 1
 
         total_issues_greater_than_7days = total_issues_json["open_issues"] - count - count2
-        params = {'total': total_issues, 'count': count, 'count2': count2, 'total_greater_than_7days': total_issues_greater_than_7days, 'li_last_24hr_url_api': li_last_24hr_url_api}
+        params = {'total': total_issues, 'count': count, 'count2': count2, 'total_greater_than_7days': total_issues_greater_than_7days, 'li_last_24hr_url_api': li_last_24hr_url_api, 'title': title_li}
         return render(request, 'issues/getData.html', params)
 
 
