@@ -78,6 +78,9 @@ AUTHENTICATION_BACKENDS = (
 # SOCIAL_AUTH_LOGIN_URL = '/'
 
 
+LOGIN_REDIRECT_URL = '/'
+
+
 MIDDLEWARE_CLASSES = [
     #'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

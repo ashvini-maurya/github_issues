@@ -5,12 +5,16 @@
     <title></title>
 </head>
 <body>
-Total number of open issues: {{ total }}<br><br><br>
+<h4>Total number of open issues:</h4> {{ total }}<br><br>
 
-Total number of opened issues in last 24 Hours: {{ count }}<br><br><br>
+<h4>Total number of opened issues in last 24 Hours:</h4> {{ count }}<br><br>
 
-Total number of open issues that were opened more than 24 Hours but less than 7 days ago: {{ count2 }}<br><br><br>
+<h4>And issues URL's are:</h4> {% for api_url in li_last_24hr_url_api %}
+                        <li><a href={{ api_url }}></a></li><br>
+                      {% endfor %}<br><br>
 
-Total Number of open issues that were opened more than 7 days ago: {{ total_greater_than_7days }}
+<h4>Total number of open issues that were opened more than 24 Hours but less than 7 days ago:</h4> {{ count2 }}<br><br>
+
+<h4>Total Number of open issues that were opened more than 7 days ago:</h4> {{ total_greater_than_7days }}
 </body>
 </html>
