@@ -1,27 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-<h2>Total number of open issues:</h2> {{ total }}<br><br>
+{% extends 'issues/base.html' %}
+{% load staticfiles %}
+{% block title %}GitHub Issue Tracker{% endblock %}
+{% block body_block %}
 
-<h2>Total number of opened issues in last 24 Hours:</h2> {{ count }}<br><br>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h2>Total number of open issues: {{ total }}</h2></div> <br><br>
+    </div>
 
 
-<h4>And their URL's are:</h4> {% for url, title in dict_of_url_and_title.iteritems %}
-                        <li><a href={{ url }} target="_blank">{{ title }}</a></li><br>
-                      {% endfor %}<br><br>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h2>Total number of opened issues in last 24 Hours: {{ count }}</h2></div><br><br>
+    </div>
 
 
-<h2>Total number of open issues that were opened more than 24 Hours but less than 7 days ago:</h2> {{ count2 }}<br><br>
+    <h4>And their URL's are:</h4> {% for url, title in dict_of_url_and_title.iteritems %}
+                            <li><a href={{ url }} target="_blank">{{ title }}</a></li><br>
+                          {% endfor %}<br><br>
 
-<h4>And their  URL's are:</h4> {% for url2, title2 in dict_of_url_and_title2.iteritems %}
-                        <li><a href={{ url2 }} target="_blank">{{ title2 }}</a></li><br>
-                      {% endfor %}<br><br>
 
-<h2>Total Number of open issues that were opened more than 7 days ago:</h2> {{ total_greater_than_7days }}
+    <div class="panel panel-default">
+        <div class="panel-heading"><h2>Total number of open issues that were opened more than 24 Hours but less than 7 days ago: {{ count2 }}</h2></div><br><br>
+    </div>
 
-</body>
-</html>
+
+    <h4>And their  URL's are:</h4> {% for url2, title2 in dict_of_url_and_title2.iteritems %}
+                            <li><a href={{ url2 }} target="_blank">{{ title2 }}</a></li><br>
+                          {% endfor %}<br><br>
+
+    <div class="panel panel-default">
+    <div class="panel-heading"><h2>Total Number of open issues that were opened more than 7 days ago: {{ total_greater_than_7days }}</h2></div>
+    </div>
+
+
+{% endblock %}
