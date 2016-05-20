@@ -9,7 +9,7 @@
         <meta name="author" content="">
         <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
-        <title>GitHub Issues</title>
+        <title>GitHub Issues Tracker</title>
 
         <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
@@ -48,9 +48,7 @@
 
                             {% endif %}
                                     <li><a href="{% url 'about' %}">About</a></li>
-
-
-
+{#                                    <li><a href="{% url 'index' %}">Home</a> </li>#}
 
                     </ul>
                 </div>
@@ -58,13 +56,20 @@
         </div>
 
 
-        <div class="span7 text-center">
-        <h1>GITHUB ISSUE TRACKER:</h1>
-            <form action="geturl" method="get">
-                <input type="url" name="URL" size="35" placeholder="Enter public repo Issue URL">
-                <input type="submit" name="submit" value="submit">
-            </form>
-        </div>
+        {% block body_block %}{% endblock %}
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+        <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+{#        <div class="span7 text-center">#}
+{#        <h1>GITHUB ISSUE TRACKER:</h1>#}
+{#            <form action="geturl" method="get">#}
+{#                <input type="url" name="URL" size="35" placeholder="Enter public repo Issue URL">#}
+{#                <input type="submit" name="submit" value="submit">#}
+{#            </form>#}
+{#        </div>#}
     </body>
 </html>
 
