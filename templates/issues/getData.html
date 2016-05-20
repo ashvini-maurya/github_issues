@@ -9,9 +9,15 @@
 
 <h4>Total number of opened issues in last 24 Hours:</h4> {{ count }}<br><br>
 
-<h4>And issues URL's are:</h4> {% for api_url in li_last_24hr_url_api %}
-                        <li><a href={{ api_url }}>{% for title_name in title %}{{ title_name }}<br />{% endfor %}</a></li><br>
+{#<h4>And issues URL's are:</h4> {% for api_url in li_last_24hr_url_api %}#}
+{#                        <li><a href={{ api_url }}>{% for title_name in title %}{{ title_name }}<br />{% endfor %}</a></li><br>#}
+{#                      {% endfor %}<br><br>#}
+
+
+<h4>And issues URL's are:</h4> {% for url, title in dict_of_url_and_title.iteritems %}
+                        <li><a href={{ url }}>{{ title }}</a></li><br>
                       {% endfor %}<br><br>
+
 
 <h4>Total number of open issues that were opened more than 24 Hours but less than 7 days ago:</h4> {{ count2 }}<br><br>
 
