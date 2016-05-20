@@ -32,12 +32,13 @@ def getUrl(request):
         issue_api_in_last_24hr = "https://api.github.com/repos/" + str(splitted_url[3]) + "/" + str(splitted_url[4]) + "/issues?"
         get_url_api_data = requests.get(issue_api_in_last_24hr, params=parameters)
         last_24hr_url_api = get_url_api_data.url
+        print last_24hr_url_api
         last_24hr_url_api_data = requests.get(last_24hr_url_api)
-        print(last_24hr_url_api_data).json()
+        print(last_24hr_url_api_data)
 
         li_last_24hr_url_api = []
         for api_urls in last_24hr_url_api_data.json():
-            li_last_24hr_url_api.append(api_urls["url"])
+            li_last_24hr_url_api.append(api_urls["html_url"])
 
 
         title_li = []
