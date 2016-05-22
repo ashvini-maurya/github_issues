@@ -41,6 +41,9 @@ ALLOWED_HOSTS = []
 GITHUB_APP_ID = '62c56f5b0c683dfbc36b'
 GITHUB_API_SECRET = '4ca5313dd8f71d33eabfadbcd638fd631ded6d10'
 
+# SOCIAL_AUTH_FACEBOOK_KEY = '475630762641233'
+# SOCIAL_AUTH_FACEBOOK_SECRET = '3d590a5a32949ae5d392c5aa61450b2b'
+
 
 # Application definition
 
@@ -70,8 +73,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 
 AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.contrib.github.GithubBackend',
     'django.contrib.auth.backends.ModelBackend',
+    # 'social.backends.facebook.FacebookOAuth2'
+    'social.backends.github.GithubOAuth2',
+
 )
 
 # SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home/'
@@ -149,7 +154,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
