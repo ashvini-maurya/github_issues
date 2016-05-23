@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from issues import views
+from django.views.generic import RedirectView
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -25,6 +26,7 @@ urlpatterns = [
     url(r'^issues/', include('issues.urls')),
     url(r'', include('social.apps.django_app.urls', namespace='social')),
     url(r'', include('django.contrib.auth.urls', namespace='auth')),
+    url(r'^login/$', RedirectView.as_view(url='/login/github')),
 
 
 ]
