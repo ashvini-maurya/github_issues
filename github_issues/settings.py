@@ -73,9 +73,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
     # 'social.backends.facebook.FacebookOAuth2'
     'social.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+
 
 )
 

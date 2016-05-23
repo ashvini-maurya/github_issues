@@ -8,7 +8,11 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+
         <title>GitHub Issues Tracker</title>
+        {% load staticfiles %}
+{#        <link rel="stylesheet" href={% static "css/bootstrap.css" %}>#}
         <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
 
@@ -29,6 +33,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+{#                        <li><a href="{% url 'index' %}">Home</a> </li>#}
 
                             {% if user and not user.is_anonymous %}
 {#                                <li><a href="{% url 'auth_logout' %}?next=/rango/">Logout</a></li>#}
@@ -55,8 +60,19 @@
             </div>
         </div>
 
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    {% block side_block %}{% endblock %}
+            </div>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    {% block body_block %}{% endblock %}
+                </div>
+            </div>
+        </div>
 
-        {% block body_block %}{% endblock %}
+
+
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>

@@ -26,7 +26,6 @@ def getUrl(request):
         parameters = {'since': last_24hr, 'per_page': 100}
 
         requested_api = "https://api.github.com/repos/" + str(splitted_url[3]) + "/" + str(splitted_url[4]) + "/issues?"
-        #print requested_api
 
         get_url_api_data = requests.get(requested_api, params=parameters)
         last_24hr_url_api = get_url_api_data.url
@@ -35,6 +34,7 @@ def getUrl(request):
         li_last_24hr_url_api = []
         for api_urls in last_24hr_url_api_data.json():
             li_last_24hr_url_api.append(api_urls["html_url"])
+
 
         title_li = []
         for title in last_24hr_url_api_data.json():
@@ -45,8 +45,9 @@ def getUrl(request):
         count = 0
         for updated_value in get_url_api_data.json():
             count += 1
+        #print(count)
 
-        last_7days = last_24hr - timedelta(days=7)
+        last_7days = datetime.now() - timedelta(days=7)
         parameter2 = {'since': last_7days, 'per_page': 100}
 
         response_data = requests.get(requested_api, params=parameter2)
@@ -57,9 +58,16 @@ def getUrl(request):
         for api_url in less_than_7days_ago_api_data.json():
             li_less_than_7days_url_api.append(api_url["html_url"])
 
+        # find only urls which are in li_less_than_7days_url_api only but not in previous case
+
+        li_less_than_7days_url_api = [urls for urls in li_less_than_7days_url_api if urls not in li_last_24hr_url_api]
+
         title_li2 = []
         for title in less_than_7days_ago_api_data.json():
             title_li2.append(title['title'])
+
+# find uniqe urls name
+        title_li2 = [titles for titles in title_li2 if titles not in title_li]
 
         dict_of_url_and_title2 = dict(zip(li_less_than_7days_url_api, title_li2))
 
@@ -67,25 +75,29 @@ def getUrl(request):
         for _value in response_data.json():
             count2 += 1
 
+        count2 = count2 - count
 # for more than 7days ago
         more_than_7days = last_7days - timedelta(days=1000)
-        parameter3 = {'since': more_than_7days, 'per_page': 500}
+        parameter3 = {'since': more_than_7days, 'per_page': 100}
 
         response_data2 = requests.get(requested_api, params=parameter3)
         more_than_7days_ago_api = response_data2.url
         more_than_7days_ago_api_data = requests.get(more_than_7days_ago_api)
+        #print more_than_7days_ago_api_data
 
         li_more_than_7days_url_api = []
         for api_url in more_than_7days_ago_api_data.json():
             li_more_than_7days_url_api.append(api_url["html_url"])
 
+        li_more_than_7days_url_api = [url2 for url2 in li_more_than_7days_url_api if url2 not in li_less_than_7days_url_api if url2 not in li_last_24hr_url_api]
+
+
         title_li3 = []
         for title in more_than_7days_ago_api_data.json():
             title_li3.append(title['title'])
 
+        title_li3 = [title2 for title2 in title_li3 if title2 not in title_li2 if title2 not in title_li]
         dict_of_url_and_title3 = dict(zip(li_more_than_7days_url_api, title_li3))
-
-
 
 
         total_issues_greater_than_7days = total_issues_json["open_issues"] - count - count2
@@ -94,7 +106,7 @@ def getUrl(request):
 
 
     else:
-        return HttpResponse("Invalid URL. url should be in format 'https://github.com/{org_name or user_name}/{repo_name}/{issues}'")
+        return render(requests, 'issues/getData.html', {'error': "Invalid URL. url should be in format 'https://github.com/{org_name or user_name}/{repo_name}/{issues}'"})
 
 def about(request):
     return render(request, 'issues/about.html', {})
