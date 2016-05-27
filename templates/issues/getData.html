@@ -39,6 +39,16 @@
 
 
 
+        <div class="panel panel-default">
+        <div class="panel-heading"><h2>Contributors in this repo are:</h2></div>
+            </div>
+
+            <h4>Contributors:</h4> {% for login, html_url in dict_of_contributor_name_and_contributor_url.iteritems %}
+                                    <li><a href={{ html_url }} target="_blank">{{ login }}</a></li><br>
+                                  {% endfor %}<br><br>
+
+
+
     {% elif error %}
         {{ error }}
 

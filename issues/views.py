@@ -13,7 +13,7 @@ def index(request):
 
 def getUrl(request):
     geturl = request.GET['URL']
-    print geturl
+    #print geturl
     if len(geturl) > 0:
         splitted_url = (geturl).split('/')
         r = requests.get(geturl)
@@ -32,11 +32,13 @@ def getUrl(request):
             get_url_api_data = requests.get(requested_api, params=parameters)
             last_24hr_url_api = get_url_api_data.url
             last_24hr_url_api_data = requests.get(last_24hr_url_api)
+            #print last_24hr_url_api_data
 
             li_last_24hr_url_api = []
             for api_urls in last_24hr_url_api_data.json():
                 li_last_24hr_url_api.append(api_urls["html_url"])
 
+            #print li_last_24hr_url_api
 
             title_li = []
             for title in last_24hr_url_api_data.json():
@@ -102,8 +104,38 @@ def getUrl(request):
             dict_of_url_and_title3 = dict(zip(li_more_than_7days_url_api, title_li3))
 
 
+
+            # find total contributors in a public repository
+
+            request_api = "https://api.github.com/repos/" + str(splitted_url[3]) + "/" + str(splitted_url[4]) + "/stats/contributors"
+            data = requests.get(request_api)
+            #print data
+
+            contributors_name_list = []
+            contributors_login_url = []
+            #total_contributors = 0
+
+            for contributor in data.json():
+                contributors_name_list.append(contributor['author']['login'])
+                contributors_login_url.append(contributor['author']['html_url'])
+
+            #print len(contributors_name_list)  # total contributors: this gives atmost 100
+            #print(contributors_name_list)
+            #print contributors_login_url
+
+            dict_of_contributor_name_and_contributor_url = dict(zip(contributors_name_list, contributors_login_url))
+            #print dict_of_contributor_name_and_contributor_url
+
+
+
+
+
+
             total_issues_greater_than_7days = total_issues_json["open_issues"] - count - count2
-            params = {'total': total_issues, 'count': count, 'count2': count2, 'total_greater_than_7days': total_issues_greater_than_7days, 'dict_of_url_and_title': dict_of_url_and_title, 'dict_of_url_and_title2': dict_of_url_and_title2, 'dict_of_url_and_title3': dict_of_url_and_title3}
+            params = {'total': total_issues, 'count': count, 'count2': count2, 'total_greater_than_7days': total_issues_greater_than_7days,\
+                      'dict_of_url_and_title': dict_of_url_and_title, 'dict_of_url_and_title2': dict_of_url_and_title2, 'dict_of_url_and_title3': dict_of_url_and_title3, \
+                      'dict_of_contributor_name_and_contributor_url': dict_of_contributor_name_and_contributor_url}
+
             return render(request, 'issues/getData.html', params)
 
 
